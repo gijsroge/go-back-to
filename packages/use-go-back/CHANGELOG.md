@@ -1,5 +1,11 @@
 # use-go-back
 
+## 3.0.0
+
+### Major Changes
+
+- Initial release of use-go-back - A React hook that navigates back to a specific route in browser history using the Navigation API, preserving scroll position.
+
 ## 2.0.0
 
 ### Major Changes
