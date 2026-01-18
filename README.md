@@ -97,11 +97,7 @@ A function `() => void` that navigates back to the target route when called.
 
 The hook works in all modern browsers. For browsers that don't support the Navigation API, it gracefully falls back to using `window.location.href` or `history.back()`.
 
-### Navigation API Support
-
-![Navigation API browser support](https://caniuse.bitsofco.de/image/navigation-api.png)
-
-<sub>Browser support data from [Can I Use](https://caniuse.com/navigation-api)</sub>
+See [Navigation API browser support](https://caniuse.com/wf-navigation) on Can I Use for detailed compatibility information.
 
 ## Development
 
