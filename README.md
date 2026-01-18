@@ -14,6 +14,7 @@ Perfect for when you have a back button in your layout that needs to return user
 - 🔄 Graceful fallback when Navigation API is not available
 - 📦 Zero dependencies (only React as peer dependency)
 - 🎨 TypeScript support
+- ⚛️ Works with any React framework (uses native browser Navigation API)
 
 ## Installation
 
@@ -106,7 +107,7 @@ A function `() => void` that navigates back to the target route when called.
 
 ## How It Works
 
-1. **Navigation API**: The hook uses the [Navigation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API) to access browser history entries.
+1. **Navigation API**: The hook uses the native browser [Navigation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API) to access browser history entries. Because it relies on the browser's native API rather than framework-specific routing, it works with any React framework (React Router, Next.js, Remix, TanStack Router, etc.).
 2. **History Search**: It searches backwards through history to find the closest entry matching your target pathname.
 3. **Scroll Preservation**: When using `window.history.go()`, the browser automatically restores the scroll position, which is perfect for nested routes.
 4. **Fallback**: If the Navigation API is not available or no matching entry is found, it falls back to the provided `fallbackUrl` or uses `history.back()`.
