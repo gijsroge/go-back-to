@@ -2,6 +2,8 @@
 
 A React hook that navigates back to a specific route in browser history using the Navigation API, preserving scroll position.
 
+Perfect for when you have a back button in your layout that needs to return users to an overview page, even after they've navigated through multiple nested routes. The hook finds the closest matching route in browser history and uses the browser's native scroll restoration, so users end up exactly where they left off.
+
 <img src="./docs/assets/demo.gif" alt="use-go-back demo" width="350" />
 
 ## Features
