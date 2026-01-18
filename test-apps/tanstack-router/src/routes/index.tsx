@@ -6,96 +6,63 @@ export const Route = createFileRoute("/")({
 
 function IndexComponent() {
 	return (
-		<div style={{ maxWidth: "800px", margin: "0 auto" }}>
-			<h1 style={{ fontSize: "2.5rem", marginBottom: "1rem", color: "#333" }}>
+		<div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+			<h1 style={{ fontSize: "2.5rem", lineHeight: "1.2", marginBottom: "1rem", color: "#333" }}>
 				Welcome to TanStack Router
 			</h1>
-			<p style={{ fontSize: "1.1rem", marginBottom: "2rem", color: "#666" }}>
-				This is a test app for the <code>use-go-back</code> hook.
+			<p style={{ fontSize: "1.1rem", marginBottom: "3rem", color: "#666" }}>
+				Click on a link below to navigate to the detail page. Use the back button and tabs to test scroll position preservation.
 			</p>
 
-			<div
-				style={{
-					background: "#fff",
-					padding: "2rem",
-					borderRadius: "8px",
-					boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-					marginBottom: "2rem",
-				}}
-			>
-				<h2 style={{ marginBottom: "1rem", color: "#333" }}>Test the useGoBack Hook</h2>
-				<p style={{ marginBottom: "1.5rem", color: "#666" }}>
-					Navigate to nested routes and use the "Back to Home" button in the header to
-					test the hook. The button will navigate back to this page while preserving scroll
-					position.
-				</p>
-
-				<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-					<Link
-						to="/about"
-						style={{
-							display: "inline-block",
-							padding: "0.75rem 1.5rem",
-							background: "#007bff",
-							color: "white",
-							textDecoration: "none",
-							borderRadius: "4px",
-							textAlign: "center",
-							width: "fit-content",
-						}}
-					>
-						Go to About Page
-					</Link>
-					<Link
-						to="/nested"
-						style={{
-							display: "inline-block",
-							padding: "0.75rem 1.5rem",
-							background: "#28a745",
-							color: "white",
-							textDecoration: "none",
-							borderRadius: "4px",
-							textAlign: "center",
-							width: "fit-content",
-						}}
-					>
-						Go to Nested Routes
-					</Link>
-				</div>
-			</div>
-
-			<div
-				style={{
-					background: "#fff",
-					padding: "2rem",
-					borderRadius: "8px",
-					boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-				}}
-			>
-				<h3 style={{ marginBottom: "1rem", color: "#333" }}>How it works</h3>
-				<ul style={{ paddingLeft: "1.5rem", color: "#666" }}>
-					<li style={{ marginBottom: "0.5rem" }}>
-						The <code>useGoBack</code> hook uses the Navigation API to find the closest
-						matching route in history
-					</li>
-					<li style={{ marginBottom: "0.5rem" }}>
-						When you navigate through nested routes, the back button will find the
-						closest "/" entry
-					</li>
-					<li style={{ marginBottom: "0.5rem" }}>
-						Scroll position is automatically preserved thanks to the Navigation API
-					</li>
-				</ul>
-			</div>
-
-			{/* Add some content to make the page scrollable */}
-			<div style={{ marginTop: "3rem", padding: "2rem", background: "#fff", borderRadius: "8px" }}>
-				<h3 style={{ marginBottom: "1rem" }}>Scroll Test Content</h3>
+			<div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "1.5rem" }}>
 				{Array.from({ length: 20 }, (_, i) => (
-					<p key={i} style={{ marginBottom: "1rem", color: "#666" }}>
-						This is paragraph {i + 1}. Scroll down to test scroll position preservation
-						when using the back button.
-					</p>
+					<Link
+						key={i}
+						to="/detail"
+						style={{
+							display: "block",
+							background: "#fff",
+							padding: "1.5rem",
+							borderRadius: "8px",
+							boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+							textDecoration: "none",
+							color: "inherit",
+							transition: "transform 0.2s, box-shadow 0.2s",
+							cursor: "pointer",
+						}}
+						onMouseEnter={(e) => {
+							e.currentTarget.style.transform = "translateY(-4px)";
+							e.currentTarget.style.boxShadow = "0 4px 8px rgba(0,0,0,0.15)";
+						}}
+						onMouseLeave={(e) => {
+							e.currentTarget.style.transform = "translateY(0)";
+							e.currentTarget.style.boxShadow = "0 2px 4px rgba(0,0,0,0.1)";
+						}}
+					>
+						<div
+							style={{
+								width: "40px",
+								height: "40px",
+								borderRadius: "8px",
+								background: "#007bff",
+								marginBottom: "1rem",
+								display: "flex",
+								alignItems: "center",
+								justifyContent: "center",
+								color: "white",
+								fontSize: "1.2rem",
+								fontWeight: "bold",
+							}}
+						>
+							{i + 1}
+						</div>
+						<h2 style={{ fontSize: "1.2rem", marginBottom: "0.5rem", color: "#333" }}>
+							Link {i + 1}
+						</h2>
+						<p style={{ color: "#666", fontSize: "0.9rem", lineHeight: "1.5" }}>
+							Click to navigate to the detail page
+						</p>
+					</Link>
 				))}
 			</div>
 		</div>

@@ -5,6 +5,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
+import "./index.css";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -25,5 +26,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <div style={{ minHeight: "100vh" }}>
+      <main style={{ padding: "2rem" }}>
+        <Outlet />
+      </main>
+    </div>
+  );
 }

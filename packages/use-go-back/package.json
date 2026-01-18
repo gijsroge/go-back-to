@@ -1,6 +1,6 @@
 {
 	"name": "use-go-back",
-	"version": "3.0.0",
+	"version": "1.0.0",
 	"description": "A React hook that navigates back to a specific route in browser history using the Navigation API, preserving scroll position",
 	"type": "module",
 	"main": "./dist/index.js",
@@ -17,7 +17,7 @@
 	"scripts": {
 		"build": "tsdown src/index.ts && pnpm run build:fix-types",
 		"build:fix-types": "node -e \"const fs=require('fs');const files=fs.readdirSync('dist');const dts=files.find(f=>f.endsWith('.d.ts')&&f.startsWith('index-'));if(dts)fs.copyFileSync('dist/'+dts,'dist/index.d.ts');\"",
-		"prepublishOnly": "pnpm run build && pnpm run test:exports",
+		"prepublishOnly": "pnpm run build && pnpm run test:publint",
 		"test:unit": "vitest run --passWithNoTests",
 		"test:cov": "vitest run --coverage",
 		"test:types": "tsc",
@@ -38,7 +38,7 @@
 	],
 	"homepage": "https://github.com/gijsroge/use-go-back#readme",
 	"publishConfig": {
-		"provenance": true
+		"access": "public"
 	},
 	"peerDependencies": {
 		"react": ">=16.8.0"

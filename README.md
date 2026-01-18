@@ -2,6 +2,8 @@
 
 A React hook that navigates back to a specific route in browser history using the Navigation API, preserving scroll position.
 
+![use-go-back demo](./docs/assets/demo.gif)
+
 ## Features
 
 - 🎯 Navigate back to a specific pathname in history
@@ -115,7 +117,6 @@ pnpm run dev
 
 There are test apps available to test the hook with different routers:
 
-- `test-apps/react-router-cjs` - React Router (CommonJS)
 - `test-apps/react-router-esm` - React Router (ESM)
 - `test-apps/tanstack-router` - TanStack Router
 
