@@ -1,5 +1,11 @@
 # go-back-to
 
+## 1.1.1
+
+### Patch Changes
+
+- c3a8d5e: Test patch version for publishing workflow
+
 ## 1.1.0
 
 ### Minor Changes
