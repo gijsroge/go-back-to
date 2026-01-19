@@ -33,9 +33,7 @@
 	"bugs": {
 		"url": "https://github.com/gijsroge/go-back-to/issues"
 	},
-	"files": [
-		"dist"
-	],
+	"files": ["dist"],
 	"homepage": "https://github.com/gijsroge/go-back-to#readme",
 	"publishConfig": {
 		"access": "public"
