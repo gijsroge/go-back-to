@@ -182,4 +182,62 @@ describe("goBackTo", () => {
 
 		expect(locationHref).toBe("/")
 	})
+
+	it("should use fallbackCallback when provided instead of setting window.location.href", () => {
+		// Mock no Navigation API
+		Object.defineProperty(window, "navigation", {
+			value: undefined,
+			writable: true,
+		})
+
+		const mockCallback = vi.fn()
+
+		goBackTo({ targetPathname: "/dashboard", fallbackCallback: mockCallback })
+
+		expect(mockCallback).toHaveBeenCalledWith()
+		expect(mockCallback).toHaveBeenCalledTimes(1)
+		expect(locationHref).toBe("") // Should not set location.href when callback is provided
+	})
+
+	it("should use fallbackCallback with fallbackUrl when provided", () => {
+		// Mock no Navigation API
+		Object.defineProperty(window, "navigation", {
+			value: undefined,
+			writable: true,
+		})
+
+		const mockCallback = vi.fn()
+
+		goBackTo({ targetPathname: "/test", fallbackUrl: "/fallback", fallbackCallback: mockCallback })
+
+		expect(mockCallback).toHaveBeenCalledWith()
+		expect(mockCallback).toHaveBeenCalledTimes(1)
+		expect(locationHref).toBe("") // Should not set location.href when callback is provided
+	})
+
+	it("should use fallbackCallback when Navigation API is available but no match found", () => {
+		const mockEntries = [
+			{ url: "https://example.com/other", index: 0 },
+			{ url: "https://example.com/page1", index: 1 },
+		]
+
+		const mockNavigation = {
+			currentEntry: { index: 1 },
+			entries: () => mockEntries,
+		}
+
+		Object.defineProperty(window, "navigation", {
+			value: mockNavigation,
+			writable: true,
+		})
+
+		const mockCallback = vi.fn()
+
+		goBackTo({ targetPathname: "/target", fallbackUrl: "/fallback", fallbackCallback: mockCallback })
+
+		expect(mockHistoryGo).not.toHaveBeenCalled()
+		expect(mockCallback).toHaveBeenCalledWith()
+		expect(mockCallback).toHaveBeenCalledTimes(1)
+		expect(locationHref).toBe("") // Should not set location.href when callback is provided
+	})
 })

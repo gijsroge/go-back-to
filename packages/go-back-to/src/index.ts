@@ -8,10 +8,8 @@ export interface GoBackToOptions {
 	 * @default "/"
 	 */
 	targetPathname?: PathnameMatcher
-	/**
-	 * Fallback URL to navigate to if Navigation API is not available and no matching history entry is found
-	 */
 	fallbackUrl?: string
+	fallbackCallback?: () => void
 }
 
 /**
@@ -24,21 +22,22 @@ export interface GoBackToOptions {
  * @example
  * ```ts
  * // Go back to the index page
- * goBackTo({ targetPathname: "/" });
+ * goBackTo({ targetPathname: "/search" });
  *
  * // Go back to any search-related page
  * goBackTo({
  *   targetPathname: (url) => url.pathname.startsWith("/search")
- * });
+ * })
  *
- * // Match based on search params or origin
+ * // With fallback callback for framework-specific navigation
  * goBackTo({
- *   targetPathname: (url) => url.origin === "https://app.example.com" || url.searchParams.has("filter")
+ *   targetPathname: "/",
+ *   fallbackCallback: () => router.push("/") // React Router, Next.js, etc.
  * });
  * ```
  */
 export function goBackTo(options: GoBackToOptions = {}): void {
-	const { targetPathname = "/", fallbackUrl } = options
+	const { targetPathname = "/", fallbackUrl, fallbackCallback } = options
 
 	const matchesUrl = (url: URL): boolean => {
 		if (typeof targetPathname === "string") {
@@ -70,12 +69,16 @@ export function goBackTo(options: GoBackToOptions = {}): void {
 		}
 	}
 
-	// Fallback: if Navigation API is not available or no matching entry found
-	// Use fallbackUrl if provided, otherwise use targetPathname if it's a string, otherwise use history.back()
-	const finalFallback = fallbackUrl ?? (typeof targetPathname === "string" ? targetPathname : undefined)
-	if (finalFallback) {
-		window.location.href = finalFallback
-	} else {
-		window.history.back()
+	if (fallbackCallback) {
+		fallbackCallback()
+		return
 	}
+
+	const fallback = fallbackUrl ?? (typeof targetPathname === "string" ? targetPathname : undefined)
+	if (fallback) {
+		window.location.href = fallback
+		return
+	}
+
+	window.history.back()
 }

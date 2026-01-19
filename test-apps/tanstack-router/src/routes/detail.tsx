@@ -1,14 +1,11 @@
-import { createFileRoute, Link, useLocation } from "@tanstack/react-router";
-import { goBackTo } from "go-back-to";
+import { createFileRoute } from "@tanstack/react-router";
+import { DetailHeader } from "../components/DetailHeader";
 
 export const Route = createFileRoute("/detail")({
 	component: DetailComponent,
 });
 
 function DetailComponent() {
-	const location = useLocation();
-	const currentPath = location.pathname;
-
 	const tabs = [
 		{ label: "Overview", path: "/detail" },
 		{ label: "Details", path: "/detail/info" },
@@ -17,54 +14,7 @@ function DetailComponent() {
 
 	return (
 		<div style={{ maxWidth: "800px", margin: "0 auto" }}>
-			<button
-				onClick={() => goBackTo({ targetPathname: "/" })}
-				style={{
-					padding: "0.5rem 1rem",
-					background: "transparent",
-					color: "#666",
-					border: "1px solid #e0e0e0",
-					borderRadius: "4px",
-					cursor: "pointer",
-					fontSize: "0.9rem",
-					marginBottom: "1.5rem",
-					display: "flex",
-					alignItems: "center",
-					gap: "0.5rem",
-				}}
-			>
-				← Back to Home
-			</button>
-
-			<div
-				style={{
-					display: "flex",
-					gap: "0.5rem",
-					borderBottom: "2px solid #e0e0e0",
-					marginBottom: "2rem",
-				}}
-			>
-				{tabs.map((tab) => {
-					const isActive = currentPath.pathname === tab.path;
-					return (
-						<Link
-							key={tab.path}
-							to={tab.path}
-							style={{
-								padding: "0.75rem 1.5rem",
-								textDecoration: "none",
-								color: isActive ? "#007bff" : "#666",
-								borderBottom: isActive ? "2px solid #007bff" : "2px solid transparent",
-								marginBottom: "-2px",
-								fontWeight: isActive ? "600" : "400",
-								transition: "color 0.2s",
-							}}
-						>
-							{tab.label}
-						</Link>
-					);
-				})}
-			</div>
+			<DetailHeader tabs={tabs} />
 
 			<div>
 				<h1 style={{ fontSize: "2.5rem", marginBottom: "1rem", color: "#333" }}>Overview</h1>
