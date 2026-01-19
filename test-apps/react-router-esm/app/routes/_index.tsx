@@ -1,7 +1,7 @@
 import type { MetaFunction } from "react-router";
 
 export const meta: MetaFunction = () => {
-  return [{ title: "React Router Test App - use-go-back" }, { name: "description", content: "Test app for use-go-back hook" }];
+  return [{ title: "React Router Test App - go-back-to" }, { name: "description", content: "Test app for go-back-to" }];
 };
 
 import { Link } from "react-router";

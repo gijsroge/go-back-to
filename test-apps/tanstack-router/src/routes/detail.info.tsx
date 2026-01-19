@@ -1,12 +1,11 @@
 import { createFileRoute, Link, useLocation } from "@tanstack/react-router";
-import { useGoBack } from "use-go-back";
+import { goBackTo } from "go-back-to";
 
 export const Route = createFileRoute("/detail/info")({
 	component: DetailInfoComponent,
 });
 
 function DetailInfoComponent() {
-	const goBack = useGoBack({ targetPathname: "/" });
 	const location = useLocation();
 	const currentPath = location.pathname;
 
@@ -19,7 +18,7 @@ function DetailInfoComponent() {
 	return (
 		<div style={{ maxWidth: "800px", margin: "0 auto" }}>
 			<button
-				onClick={goBack}
+				onClick={() => goBackTo({ targetPathname: "/" })}
 				style={{
 					padding: "0.5rem 1rem",
 					background: "transparent",

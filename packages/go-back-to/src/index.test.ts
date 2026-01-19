@@ -1,8 +1,7 @@
-import { renderHook } from "@testing-library/react"
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
-import { useGoBack } from "."
+import { goBackTo } from "."
 
-describe("useGoBack", () => {
+describe("goBackTo", () => {
 	const mockHistoryGo = vi.fn()
 	const mockHistoryBack = vi.fn()
 	let locationHref = ""
@@ -41,11 +40,6 @@ describe("useGoBack", () => {
 		vi.restoreAllMocks()
 	})
 
-	it("should return a function", () => {
-		const { result } = renderHook(() => useGoBack())
-		expect(typeof result.current).toBe("function")
-	})
-
 	it("should use fallback when Navigation API is not available and fallbackUrl is provided", () => {
 		// Mock no Navigation API
 		Object.defineProperty(window, "navigation", {
@@ -53,9 +47,7 @@ describe("useGoBack", () => {
 			writable: true,
 		})
 
-		const { result } = renderHook(() => useGoBack({ targetPathname: "/test", fallbackUrl: "/fallback" }))
-
-		result.current()
+		goBackTo({ targetPathname: "/test", fallbackUrl: "/fallback" })
 
 		expect(mockHistoryGo).not.toHaveBeenCalled()
 		expect(locationHref).toBe("/fallback")
@@ -68,9 +60,7 @@ describe("useGoBack", () => {
 			writable: true,
 		})
 
-		const { result } = renderHook(() => useGoBack({ targetPathname: (url) => url.pathname.startsWith("/test") }))
-
-		result.current()
+		goBackTo({ targetPathname: (url) => url.pathname.startsWith("/test") })
 
 		expect(mockHistoryBack).toHaveBeenCalled()
 	})
@@ -92,9 +82,7 @@ describe("useGoBack", () => {
 			writable: true,
 		})
 
-		const { result } = renderHook(() => useGoBack({ targetPathname: "/" }))
-
-		result.current()
+		goBackTo({ targetPathname: "/" })
 
 		expect(mockHistoryGo).toHaveBeenCalledWith(-2)
 	})
@@ -116,13 +104,9 @@ describe("useGoBack", () => {
 			writable: true,
 		})
 
-		const { result } = renderHook(() =>
-			useGoBack({
-				targetPathname: (url) => url.pathname.startsWith("/search"),
-			})
-		)
-
-		result.current()
+		goBackTo({
+			targetPathname: (url) => url.pathname.startsWith("/search"),
+		})
 
 		// Should go back to the closest matching entry (index 1)
 		expect(mockHistoryGo).toHaveBeenCalledWith(-1)
@@ -145,13 +129,9 @@ describe("useGoBack", () => {
 			writable: true,
 		})
 
-		const { result } = renderHook(() =>
-			useGoBack({
-				targetPathname: (url) => url.searchParams.has("filter"),
-			})
-		)
-
-		result.current()
+		goBackTo({
+			targetPathname: (url) => url.searchParams.has("filter"),
+		})
 
 		// Should go back to the closest matching entry (index 0)
 		expect(mockHistoryGo).toHaveBeenCalledWith(-2)
@@ -173,11 +153,33 @@ describe("useGoBack", () => {
 			writable: true,
 		})
 
-		const { result } = renderHook(() => useGoBack({ targetPathname: "/target", fallbackUrl: "/fallback" }))
-
-		result.current()
+		goBackTo({ targetPathname: "/target", fallbackUrl: "/fallback" })
 
 		expect(mockHistoryGo).not.toHaveBeenCalled()
 		expect(locationHref).toBe("/fallback")
+	})
+
+	it("should use targetPathname as fallback when it's a string and no fallbackUrl provided", () => {
+		// Mock no Navigation API
+		Object.defineProperty(window, "navigation", {
+			value: undefined,
+			writable: true,
+		})
+
+		goBackTo({ targetPathname: "/dashboard" })
+
+		expect(locationHref).toBe("/dashboard")
+	})
+
+	it("should default targetPathname to '/' when no options provided", () => {
+		// Mock no Navigation API
+		Object.defineProperty(window, "navigation", {
+			value: undefined,
+			writable: true,
+		})
+
+		goBackTo()
+
+		expect(locationHref).toBe("/")
 	})
 })

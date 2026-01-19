@@ -1,4 +1,4 @@
-# use-go-back
+# go-back-to
 
 ## 1.1.0
 
@@ -10,7 +10,7 @@
 
 ### Initial Release
 
-- Added `useGoBack` hook for navigating back to a specific route in browser history
+- Added `goBackTo` function for navigating back to a specific route in browser history
 - Supports Navigation API for preserving scroll position
 - Flexible pathname matching (exact string or custom function)
 - Graceful fallback when Navigation API is not available

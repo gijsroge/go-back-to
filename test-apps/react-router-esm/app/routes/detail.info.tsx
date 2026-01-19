@@ -1,13 +1,12 @@
 import type { MetaFunction } from "react-router";
 import { Link, useLocation } from "react-router";
-import { useGoBack } from "use-go-back";
+import { goBackTo } from "go-back-to";
 
 export const meta: MetaFunction = () => {
   return [{ title: "Detail Info - React Router Test App" }, { name: "description", content: "Detail info page" }];
 };
 
 export default function DetailInfo() {
-  const goBack = useGoBack({ targetPathname: "/" });
   const location = useLocation();
   const currentPath = location.pathname;
 
@@ -20,7 +19,7 @@ export default function DetailInfo() {
   return (
     <div style={{ maxWidth: "800px", margin: "0 auto" }}>
       <button
-        onClick={goBack}
+        onClick={() => goBackTo({ targetPathname: "/" })}
         style={{
           padding: "0.5rem 1rem",
           background: "transparent",

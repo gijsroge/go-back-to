@@ -1,12 +1,12 @@
 # TanStack Router Test App
 
-This is a test app for the `use-go-back` package using TanStack Router.
+This is a test app for the `go-back-to` package using TanStack Router.
 
 ## Features
 
-- Demonstrates the `useGoBack` hook with TanStack Router
-- Shows how the hook preserves scroll position when navigating back
-- Includes nested routes to test the hook's ability to find the closest matching pathname
+- Demonstrates the `goBackTo` function with TanStack Router
+- Shows how the function preserves scroll position when navigating back
+- Includes nested routes to test the function's ability to find the closest matching pathname
 
 ## Getting Started
 
@@ -24,7 +24,7 @@ pnpm build
 pnpm preview
 ```
 
-## Testing useGoBack
+## Testing goBackTo
 
 1. Navigate to the home page and scroll down
 2. Navigate to nested routes (e.g., `/nested` → `/nested/child`)

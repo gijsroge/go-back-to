@@ -1,7 +1,7 @@
 {
-	"name": "use-go-back-monorepo",
+	"name": "go-back-to-monorepo",
 	"version": "1.0.0",
-	"description": "Monorepo for use-go-back package",
+	"description": "Monorepo for go-back-to package",
 	"scripts": {
 		"build": "nx affected --targets=build --exclude=test-apps/**",
 		"build:all": "nx run-many --targets=build --exclude=test-apps/**",
@@ -28,12 +28,12 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/gijsroge/use-go-back.git"
+		"url": "https://github.com/gijsroge/go-back-to.git"
 	},
 	"bugs": {
-		"url": "https://github.com/gijsroge/use-go-back/issues"
+		"url": "https://github.com/gijsroge/go-back-to/issues"
 	},
-	"homepage": "https://github.com/gijsroge/use-go-back#readme",
+	"homepage": "https://github.com/gijsroge/go-back-to#readme",
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
 		"@changesets/cli": "^2.29.0",
@@ -53,7 +53,7 @@
 		"includedScripts": ["test:unused", "test:deps", "check"]
 	},
 	"overrides": {
-		"use-go-back": "workspace:*"
+		"go-back-to": "workspace:*"
 	},
 	"private": true
 }

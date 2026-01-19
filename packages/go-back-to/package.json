@@ -1,7 +1,7 @@
 {
-	"name": "use-go-back",
+	"name": "go-back-to",
 	"version": "1.1.0",
-	"description": "A React hook that navigates back to a specific route in browser history using the Navigation API, preserving scroll position",
+	"description": "A lightweight TypeScript utility that navigates back to a specific route in browser history using the Navigation API, preserving scroll position",
 	"type": "module",
 	"main": "./dist/index.js",
 	"module": "./dist/index.js",
@@ -28,32 +28,25 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/gijsroge/use-go-back.git"
+		"url": "git+https://github.com/gijsroge/go-back-to.git"
 	},
 	"bugs": {
-		"url": "https://github.com/gijsroge/use-go-back/issues"
+		"url": "https://github.com/gijsroge/go-back-to/issues"
 	},
 	"files": [
 		"dist"
 	],
-	"homepage": "https://github.com/gijsroge/use-go-back#readme",
+	"homepage": "https://github.com/gijsroge/go-back-to#readme",
 	"publishConfig": {
 		"access": "public"
-	},
-	"peerDependencies": {
-		"react": ">=16.8.0"
 	},
 	"devDependencies": {
 		"@arethetypeswrong/cli": "^0.17.4",
 		"@changesets/cli": "^2.29.0",
-		"@testing-library/react": "^16.1.0",
+		"@types/dom-navigation": "^1.0.6",
 		"@types/node": "22.14.1",
-		"@types/react": "^18.3.0",
-		"@types/react-dom": "^18.3.0",
 		"@vitest/coverage-v8": "^3.1.1",
 		"happy-dom": "^17.4.4",
-		"react": "^18.3.0",
-		"react-dom": "^18.3.0",
 		"tsdown": "^0.15.6",
 		"typescript": "^5.8.3",
 		"vitest": "^3.1.1"

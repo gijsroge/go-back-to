@@ -2,10 +2,6 @@
 
 A lightweight TypeScript utility that navigates back to a specific route in browser history using the Navigation API, preserving scroll position.
 
-Perfect for when you have a back button in your layout that needs to return users to an overview page, even after they've navigated through multiple nested routes. The function finds the closest matching route in browser history and uses the browser's native scroll restoration, so users end up exactly where they left off.
-
-<img src="./docs/assets/demo.gif" alt="go-back-to demo" width="350" />
-
 ## Features
 
 - 🎯 Navigate back to a specific pathname in history
@@ -48,20 +44,6 @@ goBackTo({
 });
 ```
 
-### With URL Object (Search Params, Origin, etc.)
-
-```ts
-import { goBackTo } from "go-back-to";
-
-// Match based on search params or origin
-goBackTo({
-  targetPathname: (url) =>
-    url.pathname === "/dashboard" ||
-    url.searchParams.has("filter") ||
-    url.origin === "https://app.example.com",
-});
-```
-
 ### With Fallback URL
 
 ```ts
@@ -70,6 +52,17 @@ import { goBackTo } from "go-back-to";
 goBackTo({
   targetPathname: "/dashboard",
   fallbackUrl: "/dashboard", // Used if Navigation API is unavailable
+});
+```
+
+### Advanced: Match by Search Params
+
+```ts
+import { goBackTo } from "go-back-to";
+
+// Go back to any page with a specific search param
+goBackTo({
+  targetPathname: (url) => url.searchParams.has("filter"),
 });
 ```
 
@@ -109,6 +102,23 @@ function MyComponent() {
 }
 ```
 
+### With React Router
+
+```tsx
+import { goBackTo } from "go-back-to";
+
+function DetailPage() {
+  return (
+    <div>
+      <button onClick={() => goBackTo({ targetPathname: "/", fallbackUrl: "/" })}>
+        Back to List
+      </button>
+      {/* ... rest of your component */}
+    </div>
+  );
+}
+```
+
 ## API
 
 ### `goBackTo(options?)`
@@ -119,7 +129,7 @@ Navigates back to the target route in browser history.
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `targetPathname` | `string \| ((url: URL) => boolean)` | `"/"` | The target pathname to go back to. Can be an exact string match or a custom matcher function that receives the full URL object (allowing matching on pathname, origin, search params, etc.). |
+| `targetPathname` | `string \| ((url: URL) => boolean)` | `"/"` | The target pathname to go back to. Can be an exact string match or a custom matcher function that receives the full URL object. |
 | `fallbackUrl` | `string` | `undefined` | Fallback URL to navigate to if Navigation API is not available and no matching history entry is found. |
 
 #### Returns
@@ -136,40 +146,6 @@ Navigates back to the target route in browser history.
 ## Browser Support
 
 The function works in all modern browsers. For browsers that don't support the Navigation API, it gracefully falls back to using `window.location.href` or `history.back()`.
-
-See [Navigation API browser support](https://caniuse.com/wf-navigation) on Can I Use for detailed compatibility information.
-
-## Development
-
-This is a monorepo using pnpm workspaces. To develop:
-
-```bash
-# Install dependencies
-pnpm install
-
-# Build all packages
-pnpm run build
-
-# Run tests
-pnpm run test
-
-# Start dev mode (watch mode)
-pnpm run dev
-```
-
-### Test Apps
-
-There are test apps available to test the function with different routers:
-
-- `test-apps/react-router-esm` - React Router (ESM)
-- `test-apps/tanstack-router` - TanStack Router
-
-To run a test app:
-
-```bash
-cd test-apps/tanstack-router
-pnpm dev
-```
 
 ## License
 
