@@ -1,6 +1,6 @@
 {
 	"name": "go-back-to",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"description": "A lightweight TypeScript utility that navigates back to a specific route in browser history using the Navigation API, preserving scroll position",
 	"type": "module",
 	"main": "./dist/index.js",
@@ -33,7 +33,9 @@
 	"bugs": {
 		"url": "https://github.com/gijsroge/go-back-to/issues"
 	},
-	"files": ["dist"],
+	"files": [
+		"dist"
+	],
 	"homepage": "https://github.com/gijsroge/go-back-to#readme",
 	"publishConfig": {
 		"access": "public"
